@@ -1,25 +1,62 @@
 'use client'
-import {useState} from "react";
+import {useReducer, useState} from "react";
 import Select from "@/components/Select";
 import TextInput from "@/components/TextInput";
 import CheckBox from "@/components/CheckBox";
 import SummaryTable from "@/components/SummaryTable";
+import {act} from "react-dom/test-utils";
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('')
-  const [input2Value, setInput2Value] = useState('')
-  const [selectValue, setSelectValue] = useState()
-  const [checkState, setCheckState] = useState({
+  const initialState = {
+    inp1: '',
+    inp2: '',
+    sel1: '',
     cb1: false,
     cb2: false,
     cb3: false
-  })
+  }
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'SET_TEXT': return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      }
 
-  const toggleCheckbox = ({ target }) => {
-    setCheckState(prev => ({
-      ...prev,
-      [target.name]: !prev[target.name]
-    }))
+      case 'SET_SELECT': return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      }
+
+      case 'TOGGLE_CHECKBOX': return {
+        ...state,
+        [action.payload.name]: !state[action.payload.name]
+      }
+
+      default: return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  const handleInputChange = ({ target }) => {
+    dispatch({
+      type: 'SET_TEXT',
+      payload: { name: target.name, value: target.value }
+    })
+  }
+
+  const handleSelectChange = ({ target }) => {
+    dispatch({
+      type: 'SET_SELECT',
+      payload: { name: target.name, value: target.value }
+    })
+  }
+
+  const handleCheckboxClick = ({ target }) => {
+    dispatch({
+      type: 'TOGGLE_CHECKBOX',
+      payload: { name: target.name }
+    })
   }
 
   return (
@@ -27,18 +64,23 @@ export default function Home() {
         <h1>Next form page</h1>
 
         <TextInput
-          type="text" onChange={({ target }) => setInputValue(target.value)}
-          value={inputValue}
+          type="text"
+          name="inp1"
+          onChange={handleInputChange}
+          value={state.inp1}
         />
 
         <TextInput
-          type="text" onChange={({ target }) => setInput2Value(target.value)}
-          value={input2Value}
+          type="text"
+          name="inp2"
+          onChange={handleInputChange}
+          value={state.inp2}
         />
 
         <Select
-          onChange={({ target }) => setSelectValue(target.value)}
-          value={selectValue}
+          name="sel1"
+          onChange={handleSelectChange}
+          value={state.sel1}
           options={[
             { id: 1, value: '1st', label: 'First'},
             { id: 2, value: '2nd', label: 'Second'},
@@ -47,15 +89,15 @@ export default function Home() {
           >
         </Select>
 
-      <CheckBox name="cb1" isChecked={checkState.cb1} onClick={toggleCheckbox} />
-      <CheckBox name="cb2" isChecked={checkState.cb2} onClick={toggleCheckbox} />
-      <CheckBox name="cb3" isChecked={checkState.cb3} onClick={toggleCheckbox} />
+      <CheckBox name="cb1" isChecked={state.cb1} onClick={handleCheckboxClick} />
+      <CheckBox name="cb2" isChecked={state.cb2} onClick={handleCheckboxClick} />
+      <CheckBox name="cb3" isChecked={state.cb3} onClick={handleCheckboxClick} />
 
       <SummaryTable
-        checkState={checkState}
-        selectValue={selectValue}
-        inputValue={inputValue}
-        input2Value={input2Value}
+        checkState={state}
+        selectValue={state.s1}
+        inputValue={state.inp1}
+        input2Value={state.inp2}
       />
     </main>
   );

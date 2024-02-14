@@ -9,12 +9,20 @@ const useForm = () => {
     cb2: false,
     cb3: false
   }
+
+  const getStateOnTextChange = (state, action) => {
+    const cannotModify  = state.cb2 && state.sel1 === '2nd' && action.payload.name === 'inp2'
+
+    if (cannotModify) return state
+
+    return {
+    ...state,
+      [action.payload.name]: action.payload.value
+    }
+  }
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'SET_TEXT': return {
-        ...state,
-        [action.payload.name]: action.payload.value
-      }
+      case 'SET_TEXT': return getStateOnTextChange(state, action)
 
       case 'SET_SELECT': return {
         ...state,

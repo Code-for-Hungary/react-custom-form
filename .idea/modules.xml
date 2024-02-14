@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/untitled1.iml" filepath="$PROJECT_DIR$/.idea/untitled1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react-custom-form/.idea/react-custom-form.iml" filepath="$PROJECT_DIR$/../react-custom-form/.idea/react-custom-form.iml" />
     </modules>
   </component>
 </project>

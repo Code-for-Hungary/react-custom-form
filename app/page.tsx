@@ -4,6 +4,11 @@ import {useState} from "react";
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
   const [selectValue, setSelectValue] = useState('1st')
+  const [isChecked, setChecked] = useState(false)
+
+  const toggleCheckbox = () => {
+    setChecked(prev => !prev)
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -23,7 +28,7 @@ export default function Home() {
           <option value="3rd">Third</option>
         </select>
 
-      <input type="checkbox" />
+      <input type="checkbox" checked={isChecked} onClick={toggleCheckbox} />
 
       <h2>Values</h2>
       <table>
@@ -35,6 +40,10 @@ export default function Home() {
         <tr>
           <td>select value:</td>
           <td>{selectValue}</td>
+        </tr>
+        <tr>
+          <td>checkbox value:</td>
+          <td>{isChecked && 'checked'}</td>
         </tr>
         </tbody>
       </table>

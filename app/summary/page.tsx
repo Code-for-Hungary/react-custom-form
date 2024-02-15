@@ -1,11 +1,10 @@
 'use client'
-import {useContext} from "react";
-import { GlobalStateContext } from "@/providers/GlobalState";
 import SummaryTable from "@/components/SummaryTable";
 import Link from "next/link";
+import useForm from "@/hooks/useForm";
 
 const SummaryPage = () => {
-  const { state } = useContext(GlobalStateContext)
+  const { state} = useForm()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

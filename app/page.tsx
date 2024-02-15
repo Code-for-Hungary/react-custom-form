@@ -2,8 +2,8 @@
 import Select from "@/components/Select";
 import TextInput from "@/components/TextInput";
 import CheckBox from "@/components/CheckBox";
-import SummaryTable from "@/components/SummaryTable";
 import useForm from "@/hooks/useForm";
+import Link from "next/link";
 
 export default function Home() {
   const {
@@ -43,12 +43,7 @@ export default function Home() {
       <CheckBox name="cb2" isChecked={state.cb2} onClick={handleCheckboxClick} />
       <CheckBox name="cb3" isChecked={state.cb3} onClick={handleCheckboxClick} />
 
-      <SummaryTable
-        checkState={state}
-        selectValue={state.s1}
-        inputValue={state.inp1}
-        input2Value={state.inp2}
-      />
+      <Link href="/summary">Next</Link>
     </main>
   );
 }

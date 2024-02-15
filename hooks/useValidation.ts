@@ -5,7 +5,8 @@ const useValidation = (validations) => {
 
   return {
     errors: {
-      inp2: validations.inp2(state.inp2)
+      inp1: validations.inp1(state.inp1, state),
+      inp2: validations.inp2(state.inp2, state),
     }
   }
 }

@@ -15,6 +15,7 @@ export default function Home() {
   } = useForm()
 
   const { errors } = useValidation({
+    inp1: (value, state) => state.cb1 && !value ? 'Required if cb 1 checked' : null,
     inp2: value => value && value.length < 3 ? 'Too short' : null
   })
 
@@ -25,6 +26,7 @@ export default function Home() {
         <TextInput
           type="text"
           name="inp1"
+          error={errors.inp1}
           onChange={handleInputChange}
           value={state.inp1}
         />

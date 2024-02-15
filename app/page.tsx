@@ -35,11 +35,7 @@ export default function Home() {
           name="sel1"
           onChange={handleSelectChange}
           value={state.sel1}
-          options={[
-            { id: 1, value: '1st', label: 'First'},
-            { id: 2, value: '2nd', label: 'Second'},
-            { id: 3, value: '3rd', label: 'Third'},
-          ]}
+          options={state.sel1options}
           >
         </Select>
 

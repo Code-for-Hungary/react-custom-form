@@ -1,13 +1,14 @@
-import { useReducer } from "react";
+import {useEffect, useReducer} from "react";
 
 const useForm = () => {
   const initialState = {
     inp1: '',
     inp2: '',
-    sel1: '',
+    sel1: 'DEFAULT',
+    sel1options: [],
     cb1: false,
     cb2: false,
-    cb3: false
+    cb3: false,
   }
 
   const getStateOnTextChange = (state, action) => {
@@ -32,6 +33,11 @@ const useForm = () => {
       case 'TOGGLE_CHECKBOX': return {
         ...state,
         [action.payload.name]: !state[action.payload.name]
+      }
+
+      case 'SET_DROPDOWN_DATA': return {
+        ...state,
+        sel1options: action.payload.data
       }
 
       default: return state
@@ -60,6 +66,18 @@ const useForm = () => {
       payload: { name: target.name }
     })
   }
+
+  useEffect(() => {
+    (fetch('/api/ordinal-numbers')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'SET_DROPDOWN_DATA',
+          payload: { data }
+        })
+      })
+    )
+  }, []);
 
   return {
     state,

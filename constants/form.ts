@@ -1,0 +1,4 @@
+export const SET_TEXT = 'SET_TEXT'
+export const SET_SELECT = 'SET_SELECT'
+export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX'
+export const SET_DROPDOWN_DATA = 'SET_DROPDOWN_DATA'

@@ -1,10 +1,12 @@
 import {useEffect, useReducer} from "react";
+import {SET_DROPDOWN_DATA, SET_SELECT, SET_TEXT, TOGGLE_CHECKBOX} from "@/constants/form";
+import { DEFAULT_SELECT_VALUE } from "@/components/Select";
 
 const useForm = () => {
   const initialState = {
     inp1: '',
     inp2: '',
-    sel1: 'DEFAULT',
+    sel1: DEFAULT_SELECT_VALUE,
     sel1options: [],
     cb1: false,
     cb2: false,
@@ -23,19 +25,19 @@ const useForm = () => {
   }
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'SET_TEXT': return getStateOnTextChange(state, action)
+      case SET_TEXT: return getStateOnTextChange(state, action)
 
-      case 'SET_SELECT': return {
+      case SET_SELECT: return {
         ...state,
         [action.payload.name]: action.payload.value
       }
 
-      case 'TOGGLE_CHECKBOX': return {
+      case TOGGLE_CHECKBOX: return {
         ...state,
         [action.payload.name]: !state[action.payload.name]
       }
 
-      case 'SET_DROPDOWN_DATA': return {
+      case SET_DROPDOWN_DATA: return {
         ...state,
         sel1options: action.payload.data
       }
@@ -48,21 +50,21 @@ const useForm = () => {
 
   const handleInputChange = ({ target }) => {
     dispatch({
-      type: 'SET_TEXT',
+      type: SET_TEXT,
       payload: { name: target.name, value: target.value }
     })
   }
 
   const handleSelectChange = ({ target }) => {
     dispatch({
-      type: 'SET_SELECT',
+      type: SET_SELECT,
       payload: { name: target.name, value: target.value }
     })
   }
 
   const handleCheckboxClick = ({ target }) => {
     dispatch({
-      type: 'TOGGLE_CHECKBOX',
+      type: TOGGLE_CHECKBOX,
       payload: { name: target.name }
     })
   }
@@ -72,7 +74,7 @@ const useForm = () => {
       .then(res => res.json())
       .then(data => {
         dispatch({
-          type: 'SET_DROPDOWN_DATA',
+          type: SET_DROPDOWN_DATA,
           payload: { data }
         })
       })

@@ -1,5 +1,5 @@
 
-export const DEFAULT_SELECT_VALUE = 'DEFAULT_SELECT_VALUE'
+export const DEFAULT_SELECT_VALUE = ''
 
 const Select = ({ value = DEFAULT_SELECT_VALUE, onChange = ({ target: _ }) => null, options = [], ...rest }) => {
   return (

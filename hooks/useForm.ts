@@ -1,7 +1,7 @@
-import {useContext, useEffect } from "react";
-import {SET_DROPDOWN_DATA, SET_SELECT, SET_TEXT, TOGGLE_CHECKBOX} from "@/constants/form";
+import { useContext, useEffect } from "react";
+import { SET_DROPDOWN_DATA, SET_SELECT, SET_TEXT, TOGGLE_CHECKBOX } from "@/constants/form";
 import { DEFAULT_SELECT_VALUE } from "@/components/Select";
-import {GlobalStateContext} from "@/providers/GlobalState";
+import { GlobalStateContext } from "@/providers/GlobalState";
 
 const getStateOnTextChange = (state, action) => {
   const cannotModify  = state.cb2 && state.sel1 === '2nd' && action.payload.name === 'inp2'

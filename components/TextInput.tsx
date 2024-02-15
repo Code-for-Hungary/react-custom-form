@@ -1,6 +1,14 @@
-const TextInput = ({ onClick = () => null, value = '', ...rest }) => {
+const TextInput = ({
+   onClick = () => null,
+   error = null,
+   value = '',
+   ...rest
+}) => {
   return (
-    <input onClick={onClick} value={value} {...rest} />
+    <label>
+      <input onClick={onClick} value={value} {...rest} />
+      {error && <div className="text-red-600">{error}</div>}
+    </label>
   )
 }
 

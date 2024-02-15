@@ -4,6 +4,7 @@ import TextInput from "@/components/TextInput";
 import CheckBox from "@/components/CheckBox";
 import useForm from "@/hooks/useForm";
 import Link from "next/link";
+import useValidation from "@/hooks/useValidation";
 
 export default function Home() {
   const {
@@ -13,6 +14,11 @@ export default function Home() {
     handleCheckboxClick
   } = useForm()
 
+  const { errors } = useValidation({
+    inp1: (value, state) => state.cb1 && !value ? 'Required if cb 1 checked' : null,
+    inp2: value => value && value.length < 3 ? 'Too short' : null
+  })
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <h1>Next form page</h1>
@@ -20,6 +26,7 @@ export default function Home() {
         <TextInput
           type="text"
           name="inp1"
+          error={errors.inp1}
           onChange={handleInputChange}
           value={state.inp1}
         />
@@ -27,6 +34,7 @@ export default function Home() {
         <TextInput
           type="text"
           name="inp2"
+          error={errors.inp2}
           onChange={handleInputChange}
           value={state.inp2}
         />

@@ -4,6 +4,7 @@ import TextInput from "@/components/TextInput";
 import CheckBox from "@/components/CheckBox";
 import useForm from "@/hooks/useForm";
 import Link from "next/link";
+import useValidation from "@/hooks/useValidation";
 
 export default function Home() {
   const {
@@ -12,6 +13,10 @@ export default function Home() {
     handleSelectChange,
     handleCheckboxClick
   } = useForm()
+
+  const { errors } = useValidation({
+    inp2: value => value && value.length < 3 ? 'Too short' : null
+  })
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -27,6 +32,7 @@ export default function Home() {
         <TextInput
           type="text"
           name="inp2"
+          error={errors.inp2}
           onChange={handleInputChange}
           value={state.inp2}
         />

@@ -24,7 +24,6 @@ export default function Home() {
         <h1>Next form page</h1>
 
         <TextInput
-          type="text"
           name="inp1"
           error={errors.inp1}
           onChange={handleInputChange}
@@ -32,7 +31,6 @@ export default function Home() {
         />
 
         <TextInput
-          type="text"
           name="inp2"
           error={errors.inp2}
           onChange={handleInputChange}

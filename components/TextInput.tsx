@@ -6,7 +6,7 @@ const TextInput = ({
 }) => {
   return (
     <label>
-      <input onClick={onClick} value={value} {...rest} />
+      <input type="text" onClick={onClick} value={value} {...rest} />
       {error && <div className="text-red-600">{error}</div>}
     </label>
   )

@@ -45,9 +45,9 @@ export default function Home() {
           >
         </Select>
 
-      <CheckBox name="cb1" isChecked={state.cb1} onClick={handleCheckboxClick} />
-      <CheckBox name="cb2" isChecked={state.cb2} onClick={handleCheckboxClick} />
-      <CheckBox name="cb3" isChecked={state.cb3} onClick={handleCheckboxClick} />
+      <CheckBox name="cb1" isChecked={state.cb1} onChange={handleCheckboxClick} />
+      <CheckBox name="cb2" isChecked={state.cb2} onChange={handleCheckboxClick} />
+      <CheckBox name="cb3" isChecked={state.cb3} onChange={handleCheckboxClick} />
 
       <Link href="/summary">Next</Link>
     </main>
